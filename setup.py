@@ -1,17 +1,25 @@
 #!/usr/bin/env python
 """Setup file for the Watson distribution."""
 
+import os.path
 from os.path import join
 
 from setuptools import setup
-
-with open('README.rst') as f:
-    readme = f.read()
 
 # read package meta-data from version.py
 pkg = {}
 mod = join('watson', 'version.py')
 exec(compile(open(mod).read(), mod, 'exec'), {}, pkg)
+
+print('#####')
+print(pkg)
+print('#####')
+
+
+def read(filename):
+    path = os.path.abspath(os.path.dirname(__file__))
+    with open(os.path.join(path, filename), encoding='utf-8') as f:
+        return f.read()
 
 
 def parse_requirements(requirements, ignore=('setuptools',)):
@@ -35,15 +43,17 @@ def parse_requirements(requirements, ignore=('setuptools',)):
 
 
 setup(
-    name='td-watson',
+    name='watson-next',
     version=pkg['version'],
     description='A wonderful CLI to track your time!',
-    url="https://github.com/TailorDev/Watson",
+    url='https://github.com/lkiesow/watson-next',
     packages=['watson'],
-    author='TailorDev',
-    author_email='contact@tailordev.fr',
+    author='Lars Kiesow',
+    author_email='lkiesow@uos.de',
     license='MIT',
-    long_description=readme,
+    license_files=('LICENSE'),
+    long_description=read('README.md'),
+    long_description_content_type='text/markdown',
     install_requires=parse_requirements('requirements.txt'),
     python_requires='>=3.6',
     tests_require=parse_requirements('requirements-dev.txt'),
