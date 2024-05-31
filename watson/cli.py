@@ -140,7 +140,7 @@ def catch_watson_error(func):
 
 
 @click.group(cls=DYMGroup)
-@click.version_option(version=_watson.__version__, prog_name='Watson')
+@click.version_option(version=_watson.__version__, prog_name='watson-next')
 @click.option('--color/--no-color', 'color', default=None,
               help="(Don't) color output.")
 @click.pass_context
