@@ -11,10 +11,6 @@ pkg = {}
 mod = join('watson', 'version.py')
 exec(compile(open(mod).read(), mod, 'exec'), {}, pkg)
 
-print('#####')
-print(pkg)
-print('#####')
-
 
 def read(filename):
     path = os.path.abspath(os.path.dirname(__file__))
