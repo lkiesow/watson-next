@@ -7,6 +7,7 @@ from dateutil import tz
 from functools import reduce, wraps
 
 import arrow
+import psutil
 import click
 from click_didyoumean import DYMGroup
 
@@ -87,7 +88,10 @@ class DateTimeParamType(click.ParamType):
 
     def convert(self, value, param, ctx) -> arrow:
         if value:
-            date = self._parse_multiformat(value)
+            if value == 'boot':
+                date = datetime.datetime.fromtimestamp(psutil.boot_time())
+            else:
+                date = self._parse_multiformat(value)
             if date is None:
                 raise click.UsageError(
                     "Could not match value '{}' to any supported date format"
@@ -197,8 +201,8 @@ def _start(watson, project, tags, restart=False, start_at=None, gap=True):
 @cli.command()
 @click.option('--at', 'at_', type=DateTime, default=None,
               cls=MutuallyExclusiveOption, mutually_exclusive=['gap_'],
-              help=('Start frame at this time. Must be in '
-                    '(YYYY-MM-DDT)?HH:MM(:SS)? format.'))
+              help=('Start frame at this time. Must be in the format '
+                    '(YYYY-MM-DDT)?HH:MM(:SS)? or the special value `boot`.'))
 @click.option('-g/-G', '--gap/--no-gap', 'gap_', is_flag=True, default=True,
               cls=MutuallyExclusiveOption, mutually_exclusive=['at_'],
               help=("(Don't) leave gap between end time of previous project "
