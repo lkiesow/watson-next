@@ -89,7 +89,7 @@ class DateTimeParamType(click.ParamType):
     def convert(self, value, param, ctx) -> arrow:
         if value:
             if value == 'boot':
-                date = datetime.datetime.fromtimestamp(psutil.boot_time())
+                date = arrow.Arrow.fromtimestamp(psutil.boot_time())
             else:
                 date = self._parse_multiformat(value)
             if date is None:
