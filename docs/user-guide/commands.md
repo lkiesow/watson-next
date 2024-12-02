@@ -28,6 +28,7 @@ Flag | Help
 `-t, --to DATETIME` | Date and time of end of tracked activity  [required]
 `-c, --confirm-new-project` | Confirm addition of new project.
 `-b, --confirm-new-tag` | Confirm creation of new tag.
+`-n, --note TEXT` | Add log message with the added project frame.
 `--help` | Show this message and exit.
 
 ## `aggregate`
@@ -663,6 +664,7 @@ Flag | Help
 `-g, --gap / -G, --no-gap` | (Don't) leave gap between end time of previous project and start time of the current.
 `-c, --confirm-new-project` | Confirm addition of new project.
 `-b, --confirm-new-tag` | Confirm creation of new tag.
+`-n, --note TEXT` | Add log message to started frame.
 `--help` | Show this message and exit.
 
 ## `status`
@@ -710,17 +712,25 @@ If `--at` option is given, the provided stopping time is used. The
 specified time must be after the beginning of the to-be-ended frame and must
 not be in the future.
 
+You can optionally pass a log message to be saved with the frame via
+the ``-n/--note`` option.
+
 Example:
 
 
     $ watson stop --at 13:37
     Stopping project apollo11, started an hour ago and stopped 30 minutes ago. (id: e9ccd52) # noqa: E501
 
+    $ watson stop -n "Done some thinking"
+    Stopping project apollo11, started a minute ago. (id: e7ccd52)
+    Log message: Done some thinking
+
 ### Options
 
 Flag | Help
 -----|-----
 `--at DATETIME` | Stop frame at this time. Must be in (YYYY-MM-DDT)?HH:MM(:SS)? format.
+`-n, --note TEXT` | Save given log message with the project frame.
 `--help` | Show this message and exit.
 
 ## `sync`

@@ -61,3 +61,20 @@ License
 
 Watson-next is released under the MIT License.
 See the bundled LICENSE file for details.
+
+Develop
+-------
+
+1. Make an environment
+```
+make env
+```
+2. Activate your environment
+```
+source .venv/bin/activate 
+```
+3. Make it dev
+```
+make install-dev
+```
+

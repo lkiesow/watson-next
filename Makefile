@@ -3,8 +3,8 @@
 PYTHON ?= python
 PIP ?= pip
 
-VENV = virtualenv
-VENV_ARGS = -p $(PYTHON)
+VENV = $(PYTHON) -m venv
+VENV_ARGS = 
 VENV_DIR = $(CURDIR)/.venv
 VENV_WATSON_DIR = $(CURDIR)/data
 
@@ -22,16 +22,16 @@ env: $(VENV_DIR)
 
 .PHONY: install
 install:
-	$(PYTHON) setup.py install
+	$(PYTHON) -m pip install .
 
 .PHONY: install-dev
 install-dev:
 	$(PIP) install -r requirements-dev.txt
-	$(PYTHON) setup.py develop
+	$(PYTHON) -m pip install --editable .
 
 .PHONY: check
 check: clean
-	$(PYTHON) setup.py test
+	pytest
 
 .PHONY: clean
 clean:

@@ -184,6 +184,15 @@ Globally configure which day corresponds to the start of a week. Allowable
 values are `monday`, `tuesday`, `wednesday`, `thursday`, `friday`,
  `saturday`, and `sunday`.
 
+#### `options.notes_concatenate` (default: `false`)
+
+Using `--note` notes can be specified on start and stop of a frame. 
+
+If you stop a frame and specify a note on a frame that already has a note 
+assigend, it will by default replace the note with the last one specified.
+
+Changing this option to `true` will instead concatenate both note strings.
+
 
 ### Default tags
 
